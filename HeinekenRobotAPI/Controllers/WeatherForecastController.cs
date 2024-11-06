@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace RobotAPI.Controllers
+namespace HeinekenRobotAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

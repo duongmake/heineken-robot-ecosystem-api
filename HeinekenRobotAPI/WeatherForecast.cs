@@ -1,4 +1,4 @@
-namespace RobotAPI
+namespace HeinekenRobotAPI
 {
     public class WeatherForecast
     {
