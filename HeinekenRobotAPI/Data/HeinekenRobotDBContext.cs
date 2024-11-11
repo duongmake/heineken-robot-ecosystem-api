@@ -23,6 +23,7 @@ namespace HeinekenRobotAPI.Data
         public virtual DbSet<Region>? Regions { get; set; }
         public virtual DbSet<RewardRule>? RewardRules { get; set; }
         public virtual DbSet<Robot>? Robots { get; set; }
+        public virtual DbSet<RobotType>? RobotTypes { get; set; }
         public virtual DbSet<Transaction>? Transactions { get; set; }
         public virtual DbSet<User>? Users { get; set; }
 

@@ -7,8 +7,6 @@
         public string Status { get; set; } = string.Empty;
         public string ContainerStatus { get; set; } = string.Empty;
         public DateTime LastServiceDate { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public DateTime UpdatedDate { get; set; } = DateTime.Now;
 
         public Guid LocationId { get; set; }
         public Location? Location { get; set; }

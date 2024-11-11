@@ -10,15 +10,13 @@ namespace HeinekenRobotAPI.FluentAPI
         {
             builder.ToTable("Robot");
             builder.HasKey(x => x.RobotId);
-            builder.Property(x => x.RobotCode).IsRequired();
-            builder.Property(x => x.RobotType).IsRequired();
+            builder.Property(x => x.RobotName).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.BatteryLevel).IsRequired();
             builder.Property(x => x.LastAccessTime).IsRequired();
-            builder.Property(x => x.CreatedDate).IsRequired();
-            builder.Property(x => x.UpdatedDate).IsRequired();
 
-
+            builder.HasOne(x => x.Location);
+            builder.HasMany(x => x.CampaignRobotMachines).WithOne(x => x.Robot).OnDelete(DeleteBehavior.NoAction);
 
         }
     }

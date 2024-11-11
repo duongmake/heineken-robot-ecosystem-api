@@ -8,8 +8,6 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public DateTime UpdatedDate { get; set; } = DateTime.Now;
 
         public Guid RegionId { get; set; }
         public Region? Region { get; set; }
