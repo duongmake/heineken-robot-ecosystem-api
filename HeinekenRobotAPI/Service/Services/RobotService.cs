@@ -13,6 +13,12 @@ namespace HeinekenRobotAPI.Service.Services
             _robotRepo = robotRepo;
         }
 
+        public Task CreateRobot(Robot robot) => _robotRepo.CreateRobot(robot);
+
         public IQueryable<Robot> GetAllRobot() => _robotRepo.GetAllRobot();
+
+        public Task<Robot> GetRobotByID(Guid id) => _robotRepo.GetRobotByID(id);
+
+        public Task<Robot> UpdateRobot(Robot robot, Guid id) => _robotRepo.UpdateRobot(robot, id);
     }
 }

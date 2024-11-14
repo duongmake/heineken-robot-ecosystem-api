@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HeinekenRobotAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/robots")]
     [ApiController]
     public class RobotController : ControllerBase
     {
@@ -36,13 +36,15 @@ namespace HeinekenRobotAPI.Controllers
 
                 var response = _mapper.Map<List<RobotVM>>(robots);
 
-                return Ok(robots);
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
+
 
     }
 }
