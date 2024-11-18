@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using HeinekenRobotAPI.DTO.Create;
+using HeinekenRobotAPI.DTO.Update;
 using HeinekenRobotAPI.DTO.ViewModels;
 using HeinekenRobotAPI.Entities;
 
@@ -13,6 +15,10 @@ namespace HeinekenRobotAPI.Mapper
                                        .ForMember(dest => dest.LocationName,
                                        opt => opt.MapFrom(src => src.Location!.LocationName))
                                        .ReverseMap();
+            CreateMap<RobotCreateDTO, Robot>().ReverseMap();
+            CreateMap<RobotUpdateDTO, Robot>().ReverseMap();
+
+
         }
     }
 }
