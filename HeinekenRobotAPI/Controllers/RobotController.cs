@@ -100,51 +100,73 @@ namespace HeinekenRobotAPI.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateRobot([FromForm] RobotUpdateDTO robot, Guid id)
-        //{
-        //    try
-        //    {
-        //        var existingRobot = _robotService.GetRobotByID(id);
-        //        if (existingRobot != null)
-        //        {
-        //            if (!string.IsNullOrEmpty(robot.RobotName))
-        //            {
-        //                existingRobot.RobotName = robot.RobotName;
-        //            }
-        //            if (!string.IsNullOrEmpty(account.Password))
-        //            {
-        //                existingAccount.Password = account.Password;
-        //            }
-        //            if (account.Status.HasValue)
-        //            {
-        //                existingAccount.Status = account.Status.Value;
-        //            }
-        //            if (account.RoleID.HasValue)
-        //            {
-        //                existingAccount.RoleID = account.RoleID.Value;
-        //            }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateRobot([FromForm] RobotUpdateDTO robot, Guid id)
+        {
+            try
+            {
+                var existingRobot = _robotService.GetRobotByID(id);
+                if (existingRobot != null)
+                {
+                    await _robotService.UpdateRobot(robot, id);
 
-        //            _accountServices.UpdateAccount(existingAccount);
+                    return Ok(new
+                    {
+                        message = "Cập nhật Robot thành công."
+                    });
 
-        //            return Ok(new
-        //            {
-        //                message = "Cập nhật tài khoản thành công."
-        //            });
+                }
 
-        //        }
+                return NotFound(new
+                {
+                    message = "Tài khoản không tồn tại."
+                });
 
-        //        return NotFound(new
-        //        {
-        //            message = "Tài khoản không tồn tại."
-        //        });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveRobot(Guid id)
+        {
+            try
+            {
+                var existingRobot = await _robotService.GetRobotByID(id);
+                if (existingRobot != null)
+                {
+                    var result = await _robotService.RemoveRobot(id);
+                    if (result)
+                    {
+                        return Ok(new
+                        {
+                            message = "Xóa Robot thành công."
+                        });
+                    }
+                    else
+                    {
+                        return NotFound(new
+                        {
+                            message = "Robot không tìm thấy hoặc xóa không thành công."
+                        });
+                    }
+                }
 
+                return NotFound(new
+                {
+                    message = "Robot không tồn tại."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HeinekenRobotAPI.DataAccess;
+using HeinekenRobotAPI.DTO.Update;
 using HeinekenRobotAPI.Entities;
 using HeinekenRobotAPI.Repository.IRepo;
 using HeinekenRobotAPI.Service.IServices;
@@ -19,6 +20,8 @@ namespace HeinekenRobotAPI.Service.Services
 
         public Task<Robot> GetRobotByID(Guid id) => _robotRepo.GetRobotByID(id);
 
-        public Task<Robot> UpdateRobot(Robot robot, Guid id) => _robotRepo.UpdateRobot(robot, id);
+        public Task<bool> RemoveRobot(Guid id) => _robotRepo.RemoveRobot(id);
+
+        public Task UpdateRobot(RobotUpdateDTO robot, Guid id) => _robotRepo.UpdateRobot(robot, id);
     }
 }

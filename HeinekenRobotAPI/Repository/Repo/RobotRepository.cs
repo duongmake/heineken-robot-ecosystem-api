@@ -1,7 +1,9 @@
 ﻿using HeinekenRobotAPI.DataAccess;
+using HeinekenRobotAPI.DTO.Update;
 using HeinekenRobotAPI.Entities;
 using HeinekenRobotAPI.Repository.IRepo;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 using static Humanizer.In;
 
 namespace HeinekenRobotAPI.Repository.Repo
@@ -62,24 +64,52 @@ namespace HeinekenRobotAPI.Repository.Repo
             }
         }
 
-        public async Task<Robot> UpdateRobot(Robot robot, Guid id)
+        public async Task UpdateRobot(RobotUpdateDTO robot, Guid id)
         {
             try
             {
                 var existRobot = await _robotDao.GetByID(id);
                 if (existRobot != null)
                 {
-                    existRobot.RobotName = robot.RobotName;
-                    existRobot.Status = robot.Status;
-                    existRobot.BatteryLevel = robot.BatteryLevel;
-                    existRobot.LastAccessTime = robot.LastAccessTime;
-                    existRobot.RobotTypeId = robot.RobotTypeId;
-                    existRobot.LocationId = robot.LocationId;
+                    if (!string.IsNullOrEmpty(robot.RobotName))
+                    {
+                        existRobot.RobotName = robot.RobotName;
+                    }
+                    if (!string.IsNullOrEmpty(robot.Status))
+                    {
+                        existRobot.Status = robot.Status;
+                    }
+                    if (robot.BatteryLevel.HasValue)
+                    {
+                        existRobot.BatteryLevel = robot.BatteryLevel.Value;
+                    }
+                    if (robot.LastAccessTime.HasValue)
+                    {
+                        existRobot.LastAccessTime = robot.LastAccessTime.Value;
+                    }
+                    if (robot.RobotTypeId.HasValue)
+                    {
+                        existRobot.RobotTypeId = robot.RobotTypeId.Value;
+                    }
+                    if (robot.LocationId.HasValue)
+                    {
+                        existRobot.LocationId = robot.LocationId.Value;
+                    }
 
                     await _robotDao.Update(existRobot);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-                return existRobot;
+        public async Task<bool> RemoveRobot(Guid id)
+        {
+            try
+            {
+                return await _robotDao.Remove(id);
             }
             catch (Exception ex)
             {
