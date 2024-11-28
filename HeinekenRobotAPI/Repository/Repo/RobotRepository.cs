@@ -38,13 +38,8 @@ namespace HeinekenRobotAPI.Repository.Repo
         {
             try
             {
-                var robot = _robotDao.GetByID(id);
-                if (robot != null)
-                {
-                    return robot;
+                return _robotDao.GetByID(id);
 
-                }
-                throw new Exception($"robot have {id} is not found.");
             }
             catch (Exception ex)
             {

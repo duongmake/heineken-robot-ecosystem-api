@@ -19,6 +19,12 @@ namespace HeinekenRobotAPI.Mapper
             CreateMap<RobotUpdateDTO, Robot>().ReverseMap();
 
 
+            CreateMap<UserVM, User>().ReverseMap();
+            CreateMap<UserCreateDTO, User>().ReverseMap();
+            CreateMap<UserUpdateDTO, User>().ReverseMap();
+
+
+
         }
     }
 }

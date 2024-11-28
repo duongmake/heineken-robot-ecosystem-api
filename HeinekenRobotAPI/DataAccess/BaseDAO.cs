@@ -43,7 +43,7 @@ namespace HeinekenRobotAPI.DataAccess
 
         public virtual async Task<T> GetByID(Tkey id)
         {
-            return await dbSet.FindAsync(id) ?? throw new KeyNotFoundException("Entity not found.");
+            return await dbSet.FindAsync(id) ?? null;
         }
 
         public virtual async Task<bool> Remove(Tkey id)
