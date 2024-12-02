@@ -13,9 +13,7 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.PointRangeMin).IsRequired();
             builder.Property(x => x.PointRangeMax).IsRequired();
             builder.Property(x => x.GiftChance).IsRequired().HasPrecision(5, 2);
-
-            builder.HasOne(x => x.Campaign);
-            builder.HasOne(x => x.Gift);
+            builder.Property(x => x.CreateTime).IsRequired().HasPrecision(5, 2);
 
         }
     }

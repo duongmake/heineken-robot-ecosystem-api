@@ -15,7 +15,6 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.BatteryLevel).IsRequired();
             builder.Property(x => x.LastAccessTime).IsRequired();
 
-            builder.HasOne(x => x.Location);
             builder.HasMany(x => x.CampaignRobotMachines).WithOne(x => x.Robot).OnDelete(DeleteBehavior.NoAction);
 
         }

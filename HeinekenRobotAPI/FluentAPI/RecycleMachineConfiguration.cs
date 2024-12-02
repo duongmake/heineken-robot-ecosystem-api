@@ -14,9 +14,11 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.ContainerStatus).IsRequired();
             builder.Property(x => x.LastServiceDate).IsRequired();
+            builder.Property(x => x.CreateTime).IsRequired();
+            builder.Property(x => x.Interaction).IsRequired();
 
-            builder.HasOne(x => x.Location);
             builder.HasMany(x => x.CampaignRobotMachines).WithOne(x => x.RecycleMachine).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.GiftRedemptions).WithOne(x => x.RecycleMachine).OnDelete(DeleteBehavior.NoAction);
 
         }
     }

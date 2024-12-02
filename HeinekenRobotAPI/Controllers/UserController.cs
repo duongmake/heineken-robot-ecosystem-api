@@ -84,7 +84,7 @@ namespace HeinekenRobotAPI.Controllers
                     Password = user.Password,
                     FullName = user.FullName,
                     Email = user.Email,
-                    Role = user.Role
+                    RoleID = user.RoleID
                 };
                 var _user = _mapper.Map<User>(newUser);
 

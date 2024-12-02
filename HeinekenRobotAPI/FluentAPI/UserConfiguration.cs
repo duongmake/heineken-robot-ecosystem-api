@@ -14,7 +14,7 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.FullName).IsRequired();
             builder.Property(x => x.Email).IsRequired();
-            builder.Property(x => x.Role).IsRequired();
+
         }
     }
 }

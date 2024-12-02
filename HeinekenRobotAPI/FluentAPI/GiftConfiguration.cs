@@ -15,6 +15,10 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.TotalCount).IsRequired();
             builder.Property(x => x.RedeemedCount).IsRequired();
             builder.Property(x => x.ExpiredCount).IsRequired();
+
+            builder.HasMany(x => x.RewardRules).WithOne(x => x.Gift).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.GiftRedemptions).WithOne(x => x.Gift).OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

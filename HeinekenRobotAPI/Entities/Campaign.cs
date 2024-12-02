@@ -12,6 +12,7 @@
         public Guid RegionId { get; set; }
         public Region? Region { get; set; }
         public List<CampaignRobotMachine>? CampaignRobotMachines { get; set; }
+        public List<RewardRule>? RewardRules { get; set; }
 
     }
 }

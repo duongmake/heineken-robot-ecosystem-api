@@ -26,6 +26,7 @@ namespace HeinekenRobotAPI.Data
         public virtual DbSet<RobotType>? RobotTypes { get; set; }
         public virtual DbSet<Transaction>? Transactions { get; set; }
         public virtual DbSet<User>? Users { get; set; }
+        public virtual DbSet<Role>? Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

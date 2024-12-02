@@ -2,6 +2,7 @@
 using HeinekenRobotAPI.DTO.Update;
 using HeinekenRobotAPI.Entities;
 using HeinekenRobotAPI.Repository.IRepo;
+using System.Security.Principal;
 
 namespace HeinekenRobotAPI.Repository.Repo
 {
@@ -91,9 +92,9 @@ namespace HeinekenRobotAPI.Repository.Repo
                     {
                         existUser.Email = user.Email;
                     }
-                    if (!string.IsNullOrEmpty(user.Role))
+                    if (user.RoleID.HasValue)
                     {
-                        existUser.Role = user.Role;
+                        existUser.RoleID = user.RoleID.Value;
                     }
 
                     await _userDao.Update(existUser);

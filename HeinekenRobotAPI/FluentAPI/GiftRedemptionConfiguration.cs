@@ -16,7 +16,6 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.RedeemedAt).IsRequired();
 
             builder.HasOne(x => x.Campaign);
-            builder.HasOne(x => x.Gift);
             builder.HasOne(x => x.User);
 
         }

@@ -15,6 +15,8 @@ namespace HeinekenRobotAPI.FluentAPI
             builder.Property(x => x.Longitude).IsRequired().HasPrecision(9, 6);
 
             builder.HasMany(x => x.CampaignRobotMachines).WithOne(x => x.Location).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.RecycleMachines).WithOne(x => x.Location).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.Robots).WithOne(x => x.Location).OnDelete(DeleteBehavior.NoAction);
 
         }
     }

@@ -8,6 +8,7 @@
         public int PointRangeMin { get; set; }
         public int PointRangeMax { get; set; }
         public decimal GiftChance { get; set; }
+        public DateTime CreateTime { get; set; }
 
         public Campaign? Campaign { get; set; }
         public Gift? Gift { get; set; }
