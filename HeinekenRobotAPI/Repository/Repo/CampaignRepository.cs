@@ -31,8 +31,7 @@ namespace HeinekenRobotAPI.Repository.Repo
         {
             try
             {
-                var campains = _campaignDao.GetAll().Include(s => s.CampaignRobotMachines)
-                                                      .Include(s => s.RewardRules);
+                var campains = _campaignDao.GetAll().Include(s => s.Region);
                 if (campains != null)
                 {
                     return campains;
