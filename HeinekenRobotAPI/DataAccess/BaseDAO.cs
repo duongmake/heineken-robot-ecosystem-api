@@ -46,6 +46,17 @@ namespace HeinekenRobotAPI.DataAccess
             return await dbSet.FindAsync(id) ?? null;
         }
 
+        public virtual async Task<T> GetByIDInclude(Tkey id, Expression<Func<T, object>> includeProperty = null)
+        {
+            IQueryable<T> query = dbSet.Where(x => EF.Property<Guid>(x, "CampaignId") == (Guid)(object)id);
+            if (includeProperty != null)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.FirstOrDefaultAsync();
+        }
+
         public virtual async Task<bool> Remove(Tkey id)
         {
             T? entity = await dbSet.FindAsync(id);

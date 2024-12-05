@@ -48,7 +48,7 @@ namespace HeinekenRobotAPI.Repository.Repo
         {
             try
             {
-                return _campaignDao.GetByID(id);
+                return _campaignDao.GetByIDInclude(id, s => s.Region);
 
             }
             catch (Exception ex)

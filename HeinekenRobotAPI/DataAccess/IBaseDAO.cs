@@ -11,5 +11,7 @@ namespace HeinekenRobotAPI.DataAccess
         Task<bool> Remove(TKey id);
         Task Update(T entity);
         Task<T> GetByID(TKey id);
+        Task<T> GetByIDInclude(TKey id, Expression<Func<T, object>> includeProperty = null);
+
     }
 }
