@@ -24,6 +24,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICampaignRepository, CampaignRepository>();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
+builder.Services.AddScoped<ICampaignRobotMachineService, CampaignRobotMachineService>();
+builder.Services.AddScoped<ICampaignRobotMachineRepository, CampaignRobotMachineRepository>();
 
 
 
