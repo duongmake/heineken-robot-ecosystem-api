@@ -40,6 +40,10 @@ namespace HeinekenRobotAPI.Mapper
             CreateMap<CampaignRobotMachineCreateDTO, CampaignRobotMachine>().ReverseMap();
             CreateMap<CampaignRobotMachineUpdateDTO, CampaignRobotMachine>().ReverseMap();
 
+            CreateMap<GiftVM, Gift>().ReverseMap();
+            CreateMap<GiftCreateDTO, Gift>().ReverseMap();
+            CreateMap<GiftUpdateDTO, Gift>().ReverseMap();
+
         }
     }
 }

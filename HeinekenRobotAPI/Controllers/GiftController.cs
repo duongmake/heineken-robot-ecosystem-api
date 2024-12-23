@@ -4,41 +4,41 @@ using HeinekenRobotAPI.DTO.Update;
 using HeinekenRobotAPI.DTO.ViewModels;
 using HeinekenRobotAPI.Entities;
 using HeinekenRobotAPI.Service.IServices;
+using HeinekenRobotAPI.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
 namespace HeinekenRobotAPI.Controllers
 {
-    [Route("api/robots")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class RobotController : ControllerBase
+    public class GiftController : ControllerBase
     {
-        private readonly IRobotService _robotService;
+        private readonly IGiftService _giftService;
         private readonly IMapper _mapper;
-        public RobotController(IRobotService robotService, IMapper mapper)
+        public GiftController(IGiftService giftService, IMapper mapper)
         {
-            _robotService = robotService;
+            _giftService = giftService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllRobot()
+        public async Task<IActionResult> GetAllGift()
         {
             try
             {
-                var robots = await _robotService.GetAllRobot().ToListAsync();
+                var gifts = await _giftService.GetAllGift().ToListAsync();
 
-                if (robots == null || !robots.Any())
+                if (gifts == null || !gifts.Any())
                 {
                     return NotFound(new
                     {
-                        message = "Robot not found."
+                        message = "Gift not found."
                     });
                 }
 
-                var response = _mapper.Map<List<RobotVM>>(robots);
+                var response = _mapper.Map<List<GiftVM>>(gifts);
 
                 return Ok(response);
             }
@@ -49,26 +49,26 @@ namespace HeinekenRobotAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRobotByID(Guid id)
+        public async Task<IActionResult> GetGiftByID(Guid id)
         {
-            var robot = await _robotService.GetRobotByID(id);
+            var gift = await _giftService.GetGiftByID(id);
 
-            if (robot != null)
+            if (gift != null)
             {
-                var responese = _mapper.Map<RobotVM>(robot);
+                var responese = _mapper.Map<GiftVM>(gift);
 
                 return Ok(responese);
             }
 
             return NotFound(new
             {
-                message = "Robot không tồn tại."
+                message = "Gift không tồn tại."
             });
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRobot([FromBody] RobotCreateDTO robot)
+        public async Task<IActionResult> CreateGift([FromBody] GiftCreateDTO gift)
         {
             try
             {
@@ -76,22 +76,21 @@ namespace HeinekenRobotAPI.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                var newRobot = new RobotCreateDTO
+                var newGift = new GiftCreateDTO
                 {
-                    RobotId = Guid.NewGuid(),
-                    RobotName = robot.RobotName,
-                    Status = robot.Status,
-                    BatteryLevel = robot.BatteryLevel,
-                    LastAccessTime = robot.LastAccessTime,
-                    RobotTypeId = robot.RobotTypeId,
-                    LocationId = robot.LocationId
+                    GiftId = Guid.NewGuid(),
+                    GiftName = gift.GiftName,
+                    Description = gift.Description,
+                    TotalCount = gift.TotalCount,
+                    RedeemedCount = gift.RedeemedCount,
+                    ExpiredCount = gift.ExpiredCount
                 };
-                var _robot = _mapper.Map<Robot>(newRobot);
+                var _gift = _mapper.Map<Gift>(newGift);
 
-                await _robotService.CreateRobot(_robot);
+                await _giftService.CreateGift(_gift);
                 return Ok(new
                 {
-                    message = "Tạo Robot thành công"
+                    message = "Tạo Gift thành công"
                 });
             }
             catch (Exception ex)
@@ -101,25 +100,25 @@ namespace HeinekenRobotAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRobot([FromForm] RobotUpdateDTO robot, Guid id)
+        public async Task<IActionResult> UpdateGift([FromForm] GiftUpdateDTO gift, Guid id)
         {
             try
             {
-                var existingRobot = _robotService.GetRobotByID(id);
-                if (existingRobot != null)
+                var existingGift = _giftService.GetGiftByID(id);
+                if (existingGift != null)
                 {
-                    await _robotService.UpdateRobot(robot, id);
+                    await _giftService.UpdateGift(gift, id);
 
                     return Ok(new
                     {
-                        message = "Cập nhật Robot thành công."
+                        message = "Cập nhật Gift thành công."
                     });
 
                 }
 
                 return NotFound(new
                 {
-                    message = "Robot không tồn tại."
+                    message = "Gift không tồn tại."
                 });
 
             }
@@ -130,33 +129,33 @@ namespace HeinekenRobotAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveRobot(Guid id)
+        public async Task<IActionResult> RemoveGift(Guid id)
         {
             try
             {
-                var existingRobot = await _robotService.GetRobotByID(id);
-                if (existingRobot != null)
+                var existingGift = await _giftService.GetGiftByID(id);
+                if (existingGift != null)
                 {
-                    var result = await _robotService.RemoveRobot(id);
+                    var result = await _giftService.RemoveGift(id);
                     if (result)
                     {
                         return Ok(new
                         {
-                            message = "Xóa Robot thành công."
+                            message = "Xóa Gift thành công."
                         });
                     }
                     else
                     {
                         return NotFound(new
                         {
-                            message = "Robot không tìm thấy hoặc xóa không thành công."
+                            message = "Gift không tìm thấy hoặc xóa không thành công."
                         });
                     }
                 }
 
                 return NotFound(new
                 {
-                    message = "Robot không tồn tại."
+                    message = "Gift không tồn tại."
                 });
             }
             catch (Exception ex)
@@ -168,5 +167,9 @@ namespace HeinekenRobotAPI.Controllers
             }
 
         }
+
+
+
+
     }
 }
