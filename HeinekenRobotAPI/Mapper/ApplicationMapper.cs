@@ -55,6 +55,11 @@ namespace HeinekenRobotAPI.Mapper
             CreateMap<GiftRedemptionCreateDTO, GiftRedemption>().ReverseMap();
             CreateMap<GiftRedemptionUpdateDTO, GiftRedemption>().ReverseMap();
 
+            CreateMap<LocationVM, Location>().ReverseMap().ForMember(dest => dest.RegionName,
+                                       opt => opt.MapFrom(src => src.Region!.RegionName));
+            CreateMap<LocationCreateDTO, Location>().ReverseMap();
+            CreateMap<LocationUpdateDTO, Location>().ReverseMap();
+
         }
     }
 }

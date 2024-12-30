@@ -30,6 +30,8 @@ builder.Services.AddScoped<IGiftRepository, GiftRepository>();
 builder.Services.AddScoped<IGiftService, GiftService>();
 builder.Services.AddScoped<IGiftRedemptionRepository, GiftRedemptionRepository>();
 builder.Services.AddScoped<IGiftRedemptionService, GiftRedemptionService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 
 
