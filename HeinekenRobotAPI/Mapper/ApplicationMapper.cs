@@ -60,6 +60,11 @@ namespace HeinekenRobotAPI.Mapper
             CreateMap<LocationCreateDTO, Location>().ReverseMap();
             CreateMap<LocationUpdateDTO, Location>().ReverseMap();
 
+            CreateMap<RecycleMachineVM, RecycleMachine>().ReverseMap().ForMember(dest => dest.LocationName,
+                                       opt => opt.MapFrom(src => src.Location!.LocationName));
+            CreateMap<RecycleMachineCreateDTO, RecycleMachine>().ReverseMap();
+            CreateMap<RecycleMachineUpdateDTO, RecycleMachine>().ReverseMap();
+
         }
     }
 }

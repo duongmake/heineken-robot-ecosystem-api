@@ -32,6 +32,8 @@ builder.Services.AddScoped<IGiftRedemptionRepository, GiftRedemptionRepository>(
 builder.Services.AddScoped<IGiftRedemptionService, GiftRedemptionService>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<IRecycleMachineRepository, RecycleMachineRepository>();
+builder.Services.AddScoped<IRecycleMachineService, RecycleMachineService>();
 
 
 
