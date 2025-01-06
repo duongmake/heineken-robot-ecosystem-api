@@ -34,6 +34,8 @@ builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IRecycleMachineRepository, RecycleMachineRepository>();
 builder.Services.AddScoped<IRecycleMachineService, RecycleMachineService>();
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddScoped<IRegionService, RegionService>();
 
 
 
