@@ -36,6 +36,8 @@ builder.Services.AddScoped<IRecycleMachineRepository, RecycleMachineRepository>(
 builder.Services.AddScoped<IRecycleMachineService, RecycleMachineService>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<IRegionService, RegionService>();
+builder.Services.AddScoped<IRewardRuleRepository, RewardRuleRepository>();
+builder.Services.AddScoped<IRewardRuleService, RewardRuleService>();
 
 
 
