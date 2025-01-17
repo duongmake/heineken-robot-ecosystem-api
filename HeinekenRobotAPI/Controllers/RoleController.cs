@@ -13,32 +13,32 @@ namespace HeinekenRobotAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CampaignController : ControllerBase
+    public class RoleController : ControllerBase
     {
-        private readonly ICampaignService _campaignService;
+        private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
-        public CampaignController(ICampaignService campaignService, IMapper mapper)
+        public RoleController(IRoleService roleService, IMapper mapper)
         {
-            _campaignService = campaignService;
+            _roleService = roleService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCampaign()
+        public async Task<IActionResult> GetAllRole()
         {
             try
             {
-                var campains = await _campaignService.GetAllCampaign().ToListAsync();
+                var roles = await _roleService.GetAllRole().ToListAsync();
 
-                if (campains == null || !campains.Any())
+                if (roles == null || !roles.Any())
                 {
                     return NotFound(new
                     {
-                        message = "Campaign not found."
+                        message = "Role not found."
                     });
                 }
 
-                var response = _mapper.Map<List<CampaignVM>>(campains);
+                var response = _mapper.Map<List<RoleVM>>(roles);
 
                 return Ok(response);
             }
@@ -49,25 +49,25 @@ namespace HeinekenRobotAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCampaignByID(Guid id)
+        public async Task<IActionResult> GetRoleByID(Guid id)
         {
-            var campaign = await _campaignService.GetCampaignByID(id);
+            var role = await _roleService.GetRoleByID(id);
 
-            if (campaign != null)
+            if (role != null)
             {
-                var responese = _mapper.Map<CampaignVM>(campaign);
+                var responese = _mapper.Map<RoleVM>(role);
 
                 return Ok(responese);
             }
 
             return NotFound(new
             {
-                message = "Campaign không tồn tại."
+                message = "Role không tồn tại."
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCampaign([FromBody] CampaignCreateDTO campaign)
+        public async Task<IActionResult> CreateRole([FromBody] RoleCreateDTO role)
         {
             try
             {
@@ -75,22 +75,17 @@ namespace HeinekenRobotAPI.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                var newAccount = new CampaignCreateDTO
+                var newRole = new RoleCreateDTO
                 {
-                    CampaignId = Guid.NewGuid(),
-                    CampaignName = campaign.CampaignName,
-                    Description = campaign.Description,
-                    StartDate = campaign.StartDate,
-                    EndDate = campaign.EndDate,
-                    Status = campaign.Status,
-                    RegionId = campaign.RegionId
+                    RoleID = Guid.NewGuid(),
+                    RoleName = role.RoleName
                 };
-                var _campaign = _mapper.Map<Campaign>(newAccount);
+                var _role = _mapper.Map<Role>(newRole);
 
-                await _campaignService.CreateCampaign(_campaign);
+                await _roleService.CreateRole(_role);
                 return Ok(new
                 {
-                    message = "Tạo Campaign thành công"
+                    message = "Tạo Role thành công"
                 });
             }
             catch (Exception ex)
@@ -100,25 +95,25 @@ namespace HeinekenRobotAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCampaign([FromForm] CampaignUpdateDTO campaign, Guid id)
+        public async Task<IActionResult> UpdateRole([FromForm] RoleUpdateDTO Role, Guid id)
         {
             try
             {
-                var existingCampaign = _campaignService.GetCampaignByID(id);
-                if (existingCampaign != null)
+                var existingRole = _roleService.GetRoleByID(id);
+                if (existingRole != null)
                 {
-                    await _campaignService.UpdateCampaign(campaign, id);
+                    await _roleService.UpdateRole(Role, id);
 
                     return Ok(new
                     {
-                        message = "Cập nhật Campaign thành công."
+                        message = "Cập nhật Role thành công."
                     });
 
                 }
 
                 return NotFound(new
                 {
-                    message = "Campaign không tồn tại."
+                    message = "Role không tồn tại."
                 });
 
             }
@@ -129,33 +124,33 @@ namespace HeinekenRobotAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveCampaign(Guid id)
+        public async Task<IActionResult> RemoveRole(Guid id)
         {
             try
             {
-                var existingCampaign = await _campaignService.GetCampaignByID(id);
-                if (existingCampaign != null)
+                var existingRole = await _roleService.GetRoleByID(id);
+                if (existingRole != null)
                 {
-                    var result = await _campaignService.RemoveCampaign(id);
+                    var result = await _roleService.RemoveRole(id);
                     if (result)
                     {
                         return Ok(new
                         {
-                            message = "Xóa Campaign thành công."
+                            message = "Xóa Role thành công."
                         });
                     }
                     else
                     {
                         return NotFound(new
                         {
-                            message = "Campaign không tìm thấy hoặc xóa không thành công."
+                            message = "Role không tìm thấy hoặc xóa không thành công."
                         });
                     }
                 }
 
                 return NotFound(new
                 {
-                    message = "Campaign không tồn tại."
+                    message = "Role không tồn tại."
                 });
             }
             catch (Exception ex)

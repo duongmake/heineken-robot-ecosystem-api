@@ -40,6 +40,8 @@ builder.Services.AddScoped<IRewardRuleRepository, RewardRuleRepository>();
 builder.Services.AddScoped<IRewardRuleService, RewardRuleService>();
 builder.Services.AddScoped<IRobotTypeRepository, RobotTypeRepository>();
 builder.Services.AddScoped<IRobotTypeService, RobotTypeService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 
 
 
